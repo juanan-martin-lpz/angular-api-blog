@@ -8,17 +8,17 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
-    "bootstrap": "^4.3.1",
-    "cookie-parser": "~1.4.4",
+    "bootstrap": "^4.4.1",
+    "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
-    "ejs": "^2.6.2",
+    "ejs": "^2.7.4",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.2.7",
-    "mongoose": "^5.7.5",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.6",
     "morgan": "~1.9.1",
-    "passport": "^0.4.0",
+    "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-strategy": "^1.0.0"
@@ -27,9 +27,9 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "jest": "^24.9.0",
-    "mocha": "^6.2.2",
-    "nodemon": "^1.19.1",
-    "superagent": "^5.1.2",
+    "mocha": "^6.2.3",
+    "nodemon": "^1.19.4",
+    "superagent": "^5.2.2",
     "supertest": "^4.0.2"
   }
 }
