@@ -1,0 +1,28 @@
+{
+  "name": "angular-api-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanan-martin-lpz/angular-api-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanan-martin-lpz/angular-api-blog/issues"
+  },
+  "homepage": "https://github.com/juanan-martin-lpz/angular-api-blog#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-exec": "^4.0.0",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-wait": "0.0.2"
+  },
+  "dependencies": {
+    "g": "^2.0.1"
+  }
+}

@@ -4,6 +4,8 @@
 api/node_modules/
 angular-client/node_modules/
 
+/node_modules/
+
 # Compiled output
 /**/dist
 /**/tmp
