@@ -15,6 +15,7 @@ router.post('/login', (req, res, next) => {
     try {
       if (err || !user) {
         return res.json({
+          status: false,
           message: 'Login unsuccessful',
           user: null,
           token: null
@@ -34,6 +35,7 @@ router.post('/login', (req, res, next) => {
         // Devolvemos un mensaje y un user mas el token que debe usar el cliente para
         // acceder a la parte privada del api
         return res.json({
+          status: true,
           message: 'Login successful',
           user: req.user,
           token: token
@@ -43,6 +45,7 @@ router.post('/login', (req, res, next) => {
     } catch (error) {
       //return next(error);
       return res.json({
+        status: false,
         message: 'Login error',
         user: '',
         token: ''
@@ -55,8 +58,10 @@ router.post('/login', (req, res, next) => {
 
 router.post('/signup', passport.authenticate('signup', { session: false }), (req, res, next) => {
   res.json({
+    status: false,
     message: 'Signup successful',
-    user: req.user
+    user: req.user,
+    token: ''
   });
 });
 
