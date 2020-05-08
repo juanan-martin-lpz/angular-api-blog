@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var Schema = mongoose.Schema;
 var Post = new Schema({
-  user: { type: ObjectId, ref: 'User' }, // User
+  user: { type: Schema.Types.ObjectId, ref: 'User' }, // User
+  image: String,
+  title: {type: String, required: false},
   content: String,
-  comments: { type: [ObjectId], ref: 'Comment' } // Comment
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment'}] // Comment
 });
 
 var PostModel = mongoose.model('Post', Post);

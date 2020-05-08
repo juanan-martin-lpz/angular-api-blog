@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var Post = require('../models/post');
+const Post = require('../models/post');
+const Comment = require('../models/comment');
+
+
 
 // El formato de las repuestas tiene como elemento comun un mensaje de texto (message)
 // y para las operaciones que involucren un solo item, el item procesado.
@@ -9,39 +12,95 @@ var Post = require('../models/post');
 // Nuevo Post
 // Requiere un user id y un texto para el contenido
 
-router.post('/new', function(req, res, next) {
+router.post('/', function(req, res, next) {
+
   var data = req.body;
 
-  Post.create({ user: data.user, content: data.content }, err => {
+  var post = new Post();
+  post.user = data.user._id;
+  post.image = data.image;
+  post.title = data.title;
+  post.content = data.content;
+
+  post.save(post, (err, p) => {
     if (err) {
-      throw err;
+      return res.status(500).json({
+        status: false,
+        message: 'Error al crear Post',
+        errors: err
+      });
     }
 
-    res.json({ message: 'Post success', post: data });
+    res.json({status: "ok",  message: 'Post creado con exito', post: p });
   });
 });
 
-// Borra todos los post. No elimina los comentarios
-router.post('/deleteall', function(req, res, next) {
-  Post.deleteMany({}, err => {
+// Borra un post con sus comentarios
+router.delete('/:id', function(req, res, next) {
+  
+  var id = req.params.id;
+
+  Comment.deleteMany({post: post._id})
+  .exec((err, comments) => {
+
     if (err) {
-      throw err;
+      return res.status(500).json({
+        status: false,
+        message: 'Error al borrar los comentarios del post',
+        errors: err
+      });
     }
 
-    res.json({ message: 'Delete All Post success' });
+    Post.findByIdAndDelete(id, (err, post) => {
+
+      if (err) {
+
+        const observer = {
+          next: comment => comment.save(),
+          error: error => json({
+            status: false,
+            message: 'Error al recuperar los comentarios del post',
+            errors: error
+          })
+        };
+
+        // Recuperar los post
+        from(comments).subscribe(observer );
+
+        return res.status(500).json({
+          status: false,
+          message: 'Error al borrar el post',
+          errors: err
+        });        
+      }
+
+      res.json({ 
+        status: true, 
+        message: 'Post borrado correctamente',
+        post: post });
+    });
+  
   });
+
 });
 
 // Retorna todos los post
-router.get('/all', function(req, res, err) {
-  var all = Post.find({});
-
-  all.exec(function(err, docs) {
+router.get('/', function(req, res, err) {
+  
+  Post.find({})
+  .populate('user')
+  .populate('comments')
+  .exec(function(err, docs) {
+  
     if (err) {
       res.json({ message: err });
     }
 
-    res.send(docs);
+    res.status(200).json({
+      status: true,
+      message: 'Consulta Posts OK',
+      posts: docs
+    });
   });
 });
 
@@ -61,6 +120,32 @@ router.get('/:id', function(req, res, err) {
 });
 
 // Modifica el post identificado por id
-router.put('/edit/:id', function(req, res, err) {});
+router.put('/:id', function(req, res, err) {
+
+  var id = req.params.id;
+
+  Post.findById(id, (err, post) => {
+
+    var data = req.body;
+
+    post.image = data.image;
+    post.title = data.title;
+    post.content = data.content;
+    
+    post.save(post, (err, p) => {
+      if (err) {
+        return res.status(500).json({
+          status: false,
+          message: 'Error al modificar el post',
+          errors: err
+        });
+      }
+
+      res.json({status: "ok",  message: 'Usuario modificado con exito', post: p });
+    });
+  });
+
+    
+});
 
 module.exports = router;

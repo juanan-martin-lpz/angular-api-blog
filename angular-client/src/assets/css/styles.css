@@ -1,0 +1,131 @@
+.center {
+  width: 75%;
+  margin: 0px auto;
+}
+
+.centered {
+  margin: 0px auto;
+}
+
+#topheader {
+  width: 100%;
+  padding-bottom: 5px;
+  border-bottom: 2px solid  #ebeaea;
+
+}
+
+#logo {
+  width: 30%;
+  font-size: 30px;
+  float: left;
+  margin-top: 15px;
+
+}
+
+#logo img {
+  display: block;
+  float: left;
+  height: 60px;
+  margin-top: -10px;
+  margin-right: 10px;
+  animation: latir infinite 2s linear;
+
+}
+
+@keyframes latir {
+  0% {
+      transform: scale(1, 1);
+  }
+  50% {
+      transform: scale(1.02, 1.02);
+  }
+  55% {
+      transform: scale(0.95, 0.95);
+  }
+  100% {
+      transform: scale(1, 1);
+  }
+}
+
+#brand {
+  display: block;
+  float: left;
+}
+
+#login {
+  width: 100%;
+  font-size: 16px;
+  margin-top: 15px;
+
+}
+#login img {
+  display: block;
+  height: 60px;
+}
+
+#brand-login {
+  display: block;
+  text-align: center;
+}
+
+#menu {
+  width: 70%;
+  float: right;
+  font-size: 18px;
+}
+
+#menu ul {
+  width: auto;
+  float: right;
+
+}
+
+#menu ul li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 5px;
+  border-bottom: 2px solid #f13e3e;
+
+}
+
+#menu a {
+  text-decoration: none;
+  color: #444444;
+  transition: 300ms all;
+}
+
+
+#menu a:hover {
+  color: #f13e3e;
+}
+.clearfix {
+  clear: both;
+}
+
+.btn {
+  display: inline-block;
+  border: 2px solid black;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  background-color: rgba(0, 0, 255, 0.493);
+  color: white;
+}
+
+.form-group {
+  padding: 10px;
+}
+
+.form-login {
+  width: 30%;
+  margin: 0px auto;
+}
+
+.textbox {
+  font-size: 14px;
+
+}

@@ -7,19 +7,23 @@ var router = express.Router();
 router.post('/login', (req, res, next) => {
   // Autenticacion de usuario.
   // Si no existe devolvemos un mensaje y user y token a null
+
+  console.log(req);
+  
   passport.authenticate('login', (err, user, info) => {
+
     try {
-      console.log(user);
       if (err || !user) {
-        res.json({
+        return res.json({
           message: 'Login unsuccessful',
           user: null,
           token: null
         });
       }
-
+      
       // Si existe....
       req.login(user, { session: false }, error => {
+        
         if (error) return next(error);
         // Codificamos el token a partir del user id de la db y el nombre del usuario.
         const body = { _id: user._id, name: user.name };
@@ -29,14 +33,20 @@ router.post('/login', (req, res, next) => {
 
         // Devolvemos un mensaje y un user mas el token que debe usar el cliente para
         // acceder a la parte privada del api
-        res.json({
+        return res.json({
           message: 'Login successful',
           user: req.user,
           token: token
         });
       });
+      
     } catch (error) {
-      return next(error);
+      //return next(error);
+      return res.json({
+        message: 'Login error',
+        user: '',
+        token: ''
+      });
     }
   })(req, res, next);
 });

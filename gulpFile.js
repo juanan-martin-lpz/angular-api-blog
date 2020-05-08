@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var exec = require('child_process').spawn;
 var nodemon = require('gulp-nodemon');
 
-const { series } = require('gulp');
+const { series, parallel } = require('gulp');
 
 
 function api(cb) {
@@ -23,7 +23,17 @@ async function mongodb(cb) {
     await exec('mongod', ['--dbpath E:\\data'], { detached: true, stdio: 'inherit', shell: true });
 }
 
+function client(cb) {
+    exec('cd angular-client && ng serve', { stdio: 'inherit', shell: true});
+}
+
+function buildclient(cb) {
+    exec('cd angular-client && ng build', { stdio: 'inherit', shell: true});
+}
+
 exports.startapi = series(mongodb, wait10, api);
 exports.mongodb = mongodb;
 exports.api = api;
-
+exports.client = client;
+exports.buildclient = buildclient;
+exports.startall = parallel(this.startapi, client);

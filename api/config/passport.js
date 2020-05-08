@@ -9,12 +9,14 @@ module.exports = (passport, User) => {
     // Clave para el cifrado. Super secreta. No poner aqui, solo para efectos ilustrativos
     secretOrKey: 'top_secret',
     // Establecemos el extractor que vamos a usar. Usamos un campo llamado token que se adjunta al body como x-www.form-urlencoded.
-    jwtFromRequest: ExtractJWT.fromBodyField('token')
+    // jwtFromRequest: ExtractJWT.fromBodyField('token')
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
   };
 
   // Comprobamos que las credenciales son validas.
   passport.use(
     new JWTstrategy(opts, (payload, done) => {
+      
       User.findOne({ id: payload.sub }, function(err, user) {
         if (err) {
           return done(err, false);
@@ -61,6 +63,9 @@ module.exports = (passport, User) => {
         passwordField: 'password'
       },
       async (name, password, done) => {
+        
+        console.log("Authenticate - buscando :" + name);
+
         try {
           console.warn('Searching User...');
 

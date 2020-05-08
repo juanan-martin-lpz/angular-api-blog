@@ -1,0 +1,15 @@
+<app-topheader [userSigned]='this.userSigned'></app-topheader>
+
+<!--
+  <div id="contents" *ngIf="userSigned">
+
+</div>
+
+
+<div id="contents" *ngIf="!userSigned">
+<app-login-form (loginSuccess)='onUserLogued($event)'></app-login-form>
+</div>
+-->
+
+<router-outlet></router-outlet>
+
