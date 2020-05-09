@@ -1,18 +1,15 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginGuard } from './guards/login.guard';
 
 
 const appRoutes: Routes = [
+  { path: '', canActivate: [LoginGuard],  component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginFormComponent },
-  { path: 'blog', component: LoginFormComponent },
-  { path: 'post', component: LoginFormComponent,
-                  children: [
-                    {path: '', component: LoginFormComponent},
-                    {path: 'new', component: LoginFormComponent},
-                    {path: 'edit', component: LoginFormComponent},
-                  ]},
-
 ];
 
 export const appRoutingProviders: any[] = [];

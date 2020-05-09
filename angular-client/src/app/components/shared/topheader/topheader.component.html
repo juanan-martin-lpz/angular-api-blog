@@ -7,7 +7,9 @@
       </span>
     </div>
 
-    <app-defaultmenu></app-defaultmenu>
+    <app-defaultmenu *ngIf="this.userSigned === false"></app-defaultmenu>
+    <app-usermenu *ngIf="this.userSigned === true"></app-usermenu>
+
 
     <div class="clearfix">
 

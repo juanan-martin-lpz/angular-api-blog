@@ -1,27 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-import { LoginService } from '../../../services/usersservice';
-
-import { Observable } from 'rxjs';
-
-import { Post } from '../../../models/post';
-
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
-  providers: [ LoginService ]
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
 
-  public posts: Post[];
-
-  constructor(private _usersService: LoginService) { }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }

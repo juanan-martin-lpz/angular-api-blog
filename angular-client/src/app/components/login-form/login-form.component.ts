@@ -1,12 +1,20 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+
 import { Observable, throwError } from 'rxjs';
+
+
 
 import { Login } from '../../models/login';
 import { SignedUserData } from '../../models/signeduser';
 
 import { LoginService } from '../../services/loginservice';
-import { TopheaderComponent } from '../shared/topheader/topheader.component';
+import { UserformComponent } from '../shared/userform/userform.component';
+import { Usuario } from '../../models/usuario';
+import { LoginResponse } from '../../models/loginresponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -16,30 +24,55 @@ import { TopheaderComponent } from '../shared/topheader/topheader.component';
 })
 export class LoginFormComponent implements OnInit {
 
-  public user: Login;
+  loginForm: FormGroup;
+
   @Output() loginSuccess = new EventEmitter();
 
   // tslint:disable-next-line: variable-name
-  constructor(private _loginService: LoginService) { }
+  constructor(private _loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = new Login();
+    this.loginForm = new FormGroup({
+      name: new FormControl( null , Validators.required ),
+      password: new FormControl( null , Validators.required )
+    });
   }
 
   onSubmit() {
     // Valida contra el API
-    this._loginService.login(this.user).subscribe(
-      response => {
-        if (response.user) {
-          localStorage.setItem('token', response.token);
-          this.loginSuccess.emit({ signed: true, token: response.token });
+
+    const user = new Login(
+      this.loginForm.value.name,
+      this.loginForm.value.password
+
+    );
+
+    console.log(user);
+
+    this._loginService.login(user).subscribe(
+      (response: LoginResponse) => {
+
+
+        if (response.status === true) {
+
+          const usuario = new Usuario(
+            response.user._id,
+            response.user.name,
+            ':)'
+          );
+
+          this._loginService.saveStorage(usuario, response.token);
+
+          this.router.navigate(['blog']);
 
         }
         else {
           this.loginSuccess.emit({ signed: false, token: '' });
         }
+
       },
       error => {
+        console.log(error);
         console.log('error en el login, no user');
         this.loginSuccess.emit({ signed: false, token: '' });
       }

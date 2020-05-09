@@ -25,7 +25,8 @@ export class LoginService {
   usuario: Usuario;
   token: string;
 
-  constructor(private _http: HttpClient, public route: Router) {
+
+  constructor(private http: HttpClient, public router: Router) {
     this.usuario = null;
     this.token = '';
 
@@ -39,12 +40,26 @@ export class LoginService {
     this.loadStorage();
   }
 
+  isLogged() {
+    this.loadStorage();
+
+    return (this.usuario !== null) ? true : false;
+  }
+
   loadStorage() {
 
-    if (localStorage.getItem('token').length > 0) {
+    if ((localStorage.getItem('token') !== null)) {
       this.usuario = JSON.parse(localStorage.getItem('user')) || null;
       this.token = localStorage.getItem('token');
     }
+    else {
+      this.usuario = null;
+      this.token = '';
+    }
+  }
+
+  getToken() {
+    return this.token;
   }
 
   logout() {
@@ -54,25 +69,15 @@ export class LoginService {
     this.usuario = null;
     this.token = '';
 
+    this.router.navigate(['login']);
+
   }
 
 
 
   login(usr: Login): Observable<any> {
 
-    return this._http.post('http://localhost:3000/login', usr).pipe(
-      map((resp: LoginResponse) => {
-
-        if (resp.status) {
-          this.saveStorage(resp.user, resp.token)
-          this.route.navigate(['/blog']);
-
-        }
-
-
-      })
-
-    );
+    return this.http.post('http://localhost:3000/login', usr);
 
   }
 }

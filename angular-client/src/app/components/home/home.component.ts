@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { LoginService } from '../../services/loginservice';
 
 @Component({
   selector: 'app-home',
@@ -14,19 +15,10 @@ export class HomeComponent implements OnInit {
 
   @Output() loginSuccess = new EventEmitter();
 
-  constructor() { }
+  constructor(private _loginService: LoginService) { }
 
   ngOnInit(): void {
-  }
-
-  onUserLogued(event) {
-
-    this.userSigned = event.signed;
-    this.userToken = event.token;
-
-    console.log(this.userToken);
-
-    this.loginSuccess.emit({ signed: true });
 
   }
+
 }

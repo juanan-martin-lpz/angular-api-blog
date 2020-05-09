@@ -4,21 +4,21 @@ import { HttpClient, HttpHeaders, ɵangular_packages_common_http_http_a, HttpReq
 
 import { Observable } from 'rxjs';
 import { Post } from '../models/post';
+import { LoginService } from './loginservice';
 
 
 @Injectable()
 export class PostsService {
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private loginService: LoginService) {
 
   }
 
-  getAllPost(): Observable<Post[]>{
+  getAll(): Observable<Post[]>{
 
-    let tokenItem = { token: localStorage.getItem('token')};
+    // Esto va en el interceptor
+    const header = new HttpHeaders().set("Authorization","Bearer " + this.loginService.getToken());
 
-    let header = new HttpHeaders().set("Authorization","Bearer " + tokenItem.token);
-
-    return this._http.get<Post[]>('http://localhost:3000/api/v1/post/all', { responseType: 'json', headers: header });
+    return this._http.get<Post[]>('http://localhost:3000/api/v1/posts', { responseType: 'json', headers: header });
   }
 }
