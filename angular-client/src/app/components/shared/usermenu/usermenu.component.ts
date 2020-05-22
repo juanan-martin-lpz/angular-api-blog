@@ -17,5 +17,6 @@ export class UsermenuComponent implements OnInit {
 
   logout(){
     this.loginService.logout();
+    this.router.navigate(['/blog']);
   }
 }

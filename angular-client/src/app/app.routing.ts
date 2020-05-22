@@ -7,10 +7,10 @@ import { LoginGuard } from './guards/login.guard';
 
 
 const appRoutes: Routes = [
-  { path: '', canActivate: [LoginGuard],  component: HomeComponent },
+  { path: '',  component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginFormComponent },
 ];
 
 export const appRoutingProviders: any[] = [];
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {  onSameUrlNavigation: 'reload', urlUpdateStrategy: 'eager'});

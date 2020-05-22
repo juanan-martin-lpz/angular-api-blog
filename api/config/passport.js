@@ -17,7 +17,7 @@ module.exports = (passport, User) => {
   passport.use(
     new JWTstrategy(opts, (payload, done) => {
       
-      User.findOne({ id: payload.sub }, function(err, user) {
+      User.find({ id: payload.sub }, function(err, user) {
         if (err) {
           return done(err, false);
         }

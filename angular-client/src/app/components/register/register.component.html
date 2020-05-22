@@ -1,1 +1,18 @@
-<p>register works!</p>
+<app-topheader></app-topheader>
+
+<div class="container col-8">
+  <form #f="ngForm" (ngSubmit)="guardar(f)">
+      <div class="form-group">
+          <label for="titulo">Nombre Usuario</label>
+          <input class="form-control" name="title" type="text" [(ngModel)]="user.name" placeholder="Nombre Usuario">
+      </div>
+      <div class="form-group">
+        <label for="passwor">Nombre Usuario</label>
+        <input class="form-control" name="password" type="password" [(ngModel)]="user.password" placeholder="Password">
+      </div>
+      <div class="buttons">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button (click)="cancelar()" class="btn btn-danger" >Cancelar</button>
+      </div>
+  </form>
+</div>

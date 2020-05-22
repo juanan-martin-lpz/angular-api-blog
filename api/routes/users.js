@@ -26,8 +26,10 @@ app.get('/', (req, res) => {
 
 app.get('/:id', (req, res) => {
 
+  
   var id = req.params.id;
-
+  console.log(id);
+  
   User.findById(id,(err, user) => {
     if (err) {
       return res.status(500).json({
@@ -44,6 +46,8 @@ app.get('/:id', (req, res) => {
         errors: err
       });
     }
+
+    console.log(user);
 
     res.status(200).json({
       status: true,
@@ -72,7 +76,7 @@ app.post('/', (req, res) => {
       });
     }
 
-    res.json({status: "ok",  message: 'Usuario creado con exito', user: u });
+    res.json({status: true,  message: 'Usuario creado con exito', user: u });
   });
 
 });
@@ -82,7 +86,7 @@ app.put('/:id', (req, res) => {
 
   var id = req.params.id;
 
-  Users.findById(id, (err, user) => {
+  User.findById(id, (err, user) => {
 
     var data = req.body;
 
@@ -99,7 +103,7 @@ app.put('/:id', (req, res) => {
         });
       }
 
-      res.json({status: "ok",  message: 'Usuario modificado con exito', user: u });
+      res.json({status: true,  message: 'Usuario modificado con exito', user: u });
     });
   });
 

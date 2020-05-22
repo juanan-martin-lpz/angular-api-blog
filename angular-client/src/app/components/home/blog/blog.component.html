@@ -1,3 +1,16 @@
 <app-topheader></app-topheader>
 
-<p>blog works!</p>
+<section>
+  <div class="card-columns center">
+    <div class="card card-separation" *ngFor="let p of posts; index as i">
+        <article class="card-body">
+            <h5 class="card-title">{{p.title}}</h5>
+            <img [src]="p._id | image" class="card-img-top w-30" alt="Imagen" name="imagen">
+            <p class="card-text">{{p.content | excerpt}}</p>
+            <a [routerLink]="['/post', p._id]" class="btn btn-primary">Leer</a>
+            <a [routerLink]="['/post/edit', p._id]" class="btn btn-danger" *ngIf="canEdit(p)">Editar</a>
+        </article>
+        <div class="w-100" *ngIf="i % 3 == 0"></div>
+      </div>
+  </div>
+</section>

@@ -3,23 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { BlogComponent } from './blog/blog.component';
 import { PostComponent } from './post/post.component';
-import { UserformComponent } from '../shared/userform/userform.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { LoginGuard } from '../../guards/login.guard';
-import { FormComponent } from './post/form/form.component';
+import { PostEntryComponent } from './post-entry/post-entry.component';
+import { ViewPostComponent } from './view-post/view-post.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
 
-  { path: '', canActivate: [LoginGuard] , component: BlogComponent },
+  { path: '', redirectTo: 'blog', pathMatch: 'full' },
 
-  { path: 'blog', canActivate: [LoginGuard], component: BlogComponent },
-  { path: 'post/:id', canActivate: [LoginGuard],
-                  children: [
-                    {path: ':id', component: FormComponent},
-                    {path: 'new', component: FormComponent},
-                    {path: 'edit/:id', component: FormComponent},
-                  ]},
-  { path: 'users', component: UsersComponent }
+  { path: 'blog', component: BlogComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'post', canActivate: [LoginGuard], component: BlogComponent },
+  { path: 'post/new', canActivate: [LoginGuard], component: PostEntryComponent},
+  { path: 'post/edit/:id', canActivate: [LoginGuard], component: PostEntryComponent},
+  { path: 'post/:id', canActivate: [LoginGuard], component: ViewPostComponent },
+  { path: 'users', canActivate: [LoginGuard], component: UsersComponent }
 
 
 ];

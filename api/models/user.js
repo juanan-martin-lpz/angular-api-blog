@@ -4,10 +4,10 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var Schema = mongoose.Schema;
 var User = new Schema({
-  name: String,
-  password: String,
-  firstName: String,
-  lastName: String
+  name: {type: String, required: true},
+  password: {type: String, required: true},
+  firstname: {type: String, required: false},
+  lastname: {type: String, required: false},
 });
 
 //Pre-Hook para cifrar el pass antes de guardar el registro

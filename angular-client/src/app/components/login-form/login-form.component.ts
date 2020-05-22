@@ -11,7 +11,6 @@ import { Login } from '../../models/login';
 import { SignedUserData } from '../../models/signeduser';
 
 import { LoginService } from '../../services/loginservice';
-import { UserformComponent } from '../shared/userform/userform.component';
 import { Usuario } from '../../models/usuario';
 import { LoginResponse } from '../../models/loginresponse';
 import { Router } from '@angular/router';
@@ -58,6 +57,8 @@ export class LoginFormComponent implements OnInit {
           const usuario = new Usuario(
             response.user._id,
             response.user.name,
+            '',
+            '',
             ':)'
           );
 
@@ -66,10 +67,6 @@ export class LoginFormComponent implements OnInit {
           this.router.navigate(['blog']);
 
         }
-        else {
-          this.loginSuccess.emit({ signed: false, token: '' });
-        }
-
       },
       error => {
         console.log(error);

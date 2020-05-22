@@ -16,8 +16,10 @@ router.post('/', function(req, res, next) {
 
   var data = req.body;
 
+  console.log(data);
+
   var post = new Post();
-  post.user = data.user._id;
+  post.user = data.user;
   post.image = data.image;
   post.title = data.title;
   post.content = data.content;
@@ -85,7 +87,7 @@ router.delete('/:id', function(req, res, next) {
 });
 
 // Retorna todos los post
-router.get('/', function(req, res, err) {
+router.get('/', function(req, res) {
   
   Post.find({})
   .populate('user')
@@ -98,7 +100,7 @@ router.get('/', function(req, res, err) {
 
     res.status(200).json({
       status: true,
-      message: 'Consulta Posts OK',
+      message: 'Consulta Blog OK',
       posts: docs
     });
   });
@@ -106,17 +108,22 @@ router.get('/', function(req, res, err) {
 
 // Retorna el post identificado por id
 router.get('/:id', function(req, res, err) {
+  
   var id = req.params.id;
 
-  var all = Post.findOne({ _id: id });
+  Post.findById(id, (err, doc) => {
 
-  all.exec(function(err, docs) {
     if (err) {
-      res.json({ message: err });
+      return res.status(400).json({
+        status: false,
+        message: 'Ha ocurrido un error al recuperar el post',
+        errors: err
+      });
     }
 
-    res.send(docs);
+    return res.json({status: "ok",  message: 'Peticion correcta', post: doc });
   });
+
 });
 
 // Modifica el post identificado por id

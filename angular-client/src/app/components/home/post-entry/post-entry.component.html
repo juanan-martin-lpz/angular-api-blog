@@ -1,0 +1,22 @@
+<app-topheader></app-topheader>
+
+<div class="container col-8">
+  <form #f="ngForm" (ngSubmit)="guardarPost(f)">
+      <div class="form-group">
+          <label for="titulo">Titulo</label>
+          <input class="form-control" name="title" type="text" [(ngModel)]="thePost.title" placeholder="Titulo del Post">
+      </div>
+      <div class="form-group">
+          <label for="contenido">Contenido</label>
+          <textarea class="form-control" name="content" [(ngModel)]="thePost.content" rows="20"></textarea>
+      </div>
+      <div class="custom-file">
+          <input (change)="seleccionImagen($event.target.files[0])" type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile" data-browse="Elegir">Selecciona Imagen</label>
+      </div>
+      <div class="buttons">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button (click)="cancelarPost()" class="btn btn-danger" >Cancelar</button>
+      </div>
+  </form>
+</div>

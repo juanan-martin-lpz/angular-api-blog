@@ -1,0 +1,22 @@
+<app-topheader></app-topheader>
+
+<div class="container col-8">
+  <form #f="ngForm" (ngSubmit)="guardarProfile(f)">
+      <div class="form-group">
+          <label for="titulo">Nombre Usuario</label>
+          <input class="form-control" disabled name="title" type="text" [(ngModel)]="profile.name" placeholder="Nombre Usuario">
+      </div>
+      <div class="form-group">
+        <label for="firstname">Nombre</label>
+        <input class="form-control" name="firstname" type="text" [(ngModel)]="profile.firstname" placeholder="Nombre">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Apellidos</label>
+        <input class="form-control" name="lastname" type="text" [(ngModel)]="profile.lastname" placeholder="Apellidos">
+      </div>
+      <div class="buttons">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button (click)="cancelarProfile()" class="btn btn-danger" >Cancelar</button>
+      </div>
+  </form>
+</div>

@@ -129,3 +129,21 @@
   font-size: 14px;
 
 }
+
+img {
+  margin-bottom: 1em;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.card-separation {
+  margin: 10px;
+}
+
+.buttons {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}

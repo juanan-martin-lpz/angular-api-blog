@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -12,13 +12,18 @@ import { SharedModule } from './components/shared/shared.module';
 import { HomeModule } from './components/home/home.module';
 import { LoginGuard } from './guards/login.guard';
 import { LoginService } from './services/loginservice';
+import { AuthorizationService } from './interceptors/authorization.service';
+import { RouterModule } from '@angular/router';
+import { UploadFileService } from './services/uploadFile.service';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     routing,
     HttpClientModule,
     SharedModule,
@@ -27,7 +32,13 @@ import { LoginService } from './services/loginservice';
   providers: [
     appRoutingProviders,
     LoginService,
-    LoginGuard
+    LoginGuard,
+    UploadFileService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

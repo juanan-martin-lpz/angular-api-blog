@@ -1,0 +1,9 @@
+<section>
+  <article class="center">
+    <h2>{{post.title}}</h2>
+    <img class="imagepost-medium" [src]="post._id | image" alt="post.title">
+    <p>{{post.content}}</p>
+    <a [routerLink]="['/blog']" class="btn btn-primary">Volver</a>
+
+  </article>
+</section>

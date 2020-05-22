@@ -66,18 +66,29 @@ export class LoginService {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
 
-    this.usuario = null;
-    this.token = '';
+    this.loadStorage();
 
     this.router.navigate(['login']);
 
   }
 
-
+  getLoggedUser() {
+    return this.usuario;
+  }
 
   login(usr: Login): Observable<any> {
 
     return this.http.post('http://localhost:3000/login', usr);
 
   }
+
+  register(usr: Usuario): Observable<any> {
+
+    usr.firstname = 'Nuevo';
+    usr.lastname = 'Usuario';
+
+    return this.http.post('http://localhost:3000/signup', usr);
+
+  }
+
 }

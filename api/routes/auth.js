@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 
 var router = express.Router();
 
+var User = require('../models/user');
+
 router.post('/login', (req, res, next) => {
   // Autenticacion de usuario.
   // Si no existe devolvemos un mensaje y user y token a null
@@ -56,13 +58,32 @@ router.post('/login', (req, res, next) => {
 
 // Creacion de usuarios
 
-router.post('/signup', passport.authenticate('signup', { session: false }), (req, res, next) => {
-  res.json({
-    status: false,
-    message: 'Signup successful',
-    user: req.user,
-    token: ''
-  });
+router.post('/signup', (req, res, next) => {
+
+    var data = req.body;
+  
+    console.log(data);
+    
+    console.log(data);
+
+    var user = new User();
+  
+    user.name = data.name;
+    user.password = data.password;
+    user.firstname = data.firstname;
+    user.lastname = data.lastname;
+  
+    user.save(user, (err, u) => {
+      if (err) {
+        return res.status(500).json({
+          status: false,
+          message: 'Error al crear usuario',
+          errors: err
+        });
+      }
+  
+      res.json({status: "ok",  message: 'Usuario creado con exito', user: u });
+    });
 });
 
 module.exports = router;
