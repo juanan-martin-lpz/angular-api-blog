@@ -20,7 +20,7 @@ function wait10(cb) {
 }
 
 async function mongodb(cb) {
-    await exec('mongod', ['--dbpath E:\\data'], { detached: true, stdio: 'inherit', shell: true });
+    await exec('mongod', ['--dbpath ~/.data'], { detached: true, stdio: 'inherit', shell: true });
 }
 
 function client(cb) {

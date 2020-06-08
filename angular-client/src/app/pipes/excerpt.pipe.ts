@@ -21,6 +21,6 @@ export class ExcerptPipe implements PipeTransform {
       excerptPhrase = excerptPhrase + result + ' ';
     });
 
-    return excerptPhrase;
+    return excerptPhrase + '...';
   }
 }

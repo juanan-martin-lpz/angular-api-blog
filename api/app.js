@@ -45,5 +45,11 @@ app.use('/api/v1/posts/images', imagesRouter);
 app.use('/api/v1/posts/comments', passport.authenticate('jwt', { session: false }), commentRouter);
 app.use('/api/v1/posts', passport.authenticate('jwt', { session: false }), postsRouter);
 
+
+//
+const server = app.listen(3000, () => {
+    console.log('Servidor iniciado en puerto 3000');
+});
+
 //
 module.exports = app;

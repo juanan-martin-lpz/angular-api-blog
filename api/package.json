@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon app.js",
     "test": "./node_modules/.bin/mocha --timeout 20000 --reporter spec --exit tests.js"
   },
   "dependencies": {
