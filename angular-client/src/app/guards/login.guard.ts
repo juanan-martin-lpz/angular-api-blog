@@ -9,13 +9,6 @@ export class LoginGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) {}
   canActivate() {
 
-    if (this.loginService.isLogged()) {
-      console.log('guard true');
-      return true;
-    }
-    else {
-      console.log('guard false');
-      this.router.navigate(['login']);
-    }
+    return this.loginService.isLogged();
   }
 }

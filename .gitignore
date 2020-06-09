@@ -3,6 +3,7 @@
 # Proyecto
 api/node_modules/
 angular-client/node_modules/
+api/uploads
 
 /node_modules/
 
