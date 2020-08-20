@@ -7,7 +7,7 @@
     "test": "./node_modules/.bin/mocha --timeout 20000 --reporter spec --exit tests.js"
   },
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
